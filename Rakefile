@@ -41,3 +41,10 @@ end
 task 'copy:kreps:java' => 'tmp/java/kreps/kreps-slf4j.jar' do
   install 'tmp/java/kreps/kreps-slf4j.jar', 'spec/kreps-slf4j.jar'
 end
+
+namespace :bundler do
+  Bundler::GemHelper.install_tasks
+end
+
+desc 'Tag & release the gem'
+task :release => [:spec, 'bundler:release']
